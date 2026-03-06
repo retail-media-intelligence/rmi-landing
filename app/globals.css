@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --rmi-accent: 37 99 235;
 }
 
 @theme inline {
@@ -23,4 +24,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg-rmi {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(37, 99, 235, 0.25), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.06), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(59, 130, 246, 0.08), transparent 35%),
+    linear-gradient(180deg, #081120 0%, #050914 48%, #020611 100%);
 }
