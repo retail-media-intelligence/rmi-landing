@@ -5,7 +5,10 @@ import Header from "@/components/Header";
 import Section from "@/components/Section";
 import Image from "next/image";
 import Button from "@/components/Button";
-import { ScanLine, Zap, Monitor, BarChart3 } from "lucide-react";
+import { ScanLine, Zap, Monitor, BarChart3, Target, TrendingUp, MonitorPlay, 
+  CircleOff, CheckCircle2, XCircle, Smartphone, Sparkles, Database, ArrowRight,
+ GalleryHorizontal, Eye, Shuffle, Map, Building2, Layers3 } from "lucide-react";
+
 
 export default function EsHome() {
   const [openImg, setOpenImg] = useState<string | null>(null);
@@ -169,17 +172,69 @@ export default function EsHome() {
         title="Miles de escaneos ocurren cada día en tu tienda. Hoy no generan ingresos."
         subtitle="Cada verificación de precio es un momento activo donde el cliente está evaluando un producto. Sin embargo, la mayoría de retailers no monetizan ese punto de decisión."
       >
-        <ul className="space-y-2 text-sm text-white/70">
-          <li>• Los verificadores de precio solo muestran información</li>
-          <li>• Las pantallas en tienda funcionan como loops pasivos</li>
-          <li>
-            • Las marcas buscan presencia en el momento exacto de evaluación
-          </li>
-          <li>
-            • Cada punto de escaneo puede convertirse en inventario publicitario
-            medible
-          </li>
-        </ul>
+        <div className="grid gap-6 md:grid-cols-2">
+
+          {/* Card 1 */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-4 inline-flex rounded-lg bg-white/10 p-3">
+              <ScanLine size={20} />
+            </div>
+
+            <p className="text-sm font-semibold text-white">
+              Verificadores de precio
+            </p>
+
+            <p className="mt-2 text-sm text-white/70">
+              Hoy solo muestran información al cliente.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-4 inline-flex rounded-lg bg-white/10 p-3">
+              <Monitor size={20} />
+            </div>
+
+            <p className="text-sm font-semibold text-white">
+              Pantallas en tienda
+            </p>
+
+            <p className="mt-2 text-sm text-white/70">
+              Funcionan como loops pasivos sin relación con el producto evaluado.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-4 inline-flex rounded-lg bg-white/10 p-3">
+              <Target size={20} />
+            </div>
+
+            <p className="text-sm font-semibold text-white">
+              Momento de evaluación
+            </p>
+
+            <p className="mt-2 text-sm text-white/70">
+              Las marcas buscan presencia exactamente cuando el cliente evalúa un producto.
+            </p>
+          </div>
+
+          {/* Card 4 */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-4 inline-flex rounded-lg bg-white/10 p-3">
+              <TrendingUp size={20} />
+            </div>
+
+            <p className="text-sm font-semibold text-white">
+              Inventario publicitario
+            </p>
+
+            <p className="mt-2 text-sm text-white/70">
+              Cada punto de escaneo puede convertirse en impresiones publicitarias medibles.
+            </p>
+          </div>
+
+        </div>
       </Section>
 
       {/* DIFFERENTIATION */}
@@ -189,28 +244,136 @@ export default function EsHome() {
         subtitle="La diferencia no es la pantalla. Es lo que la activa y cómo se monetiza."
       >
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm font-semibold text-white/50">
-              Señalización tradicional
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Contenido en loop</li>
-              <li>• Sin relación con el producto evaluado</li>
-              <li>• Difícil de medir por evento</li>
-              <li>• Modelo basado en presencia visual</li>
-            </ul>
+          {/* Traditional signage */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="inline-flex rounded-xl bg-white/10 p-3">
+                <MonitorPlay size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/40">
+                  Modelo tradicional
+                </p>
+                <p className="mt-1 text-base font-semibold text-white/80">
+                  Señalización digital
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <XCircle size={18} className="mt-0.5 shrink-0 text-white/35" />
+                <div>
+                  <p className="text-sm font-medium text-white/85">Contenido en loop</p>
+                  <p className="mt-1 text-sm text-white/60">
+                    La pantalla reproduce contenido repetitivo sin activación por evento.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CircleOff size={18} className="mt-0.5 shrink-0 text-white/35" />
+                <div>
+                  <p className="text-sm font-medium text-white/85">
+                    Sin relación con el producto evaluado
+                  </p>
+                  <p className="mt-1 text-sm text-white/60">
+                    El mensaje no responde al contexto real del cliente en ese momento.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <BarChart3 size={18} className="mt-0.5 shrink-0 text-white/35" />
+                <div>
+                  <p className="text-sm font-medium text-white/85">
+                    Difícil de medir por evento
+                  </p>
+                  <p className="mt-1 text-sm text-white/60">
+                    No existe trazabilidad clara entre interacción y exposición publicitaria.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <TrendingUp size={18} className="mt-0.5 shrink-0 text-white/35" />
+                <div>
+                  <p className="text-sm font-medium text-white/85">
+                    Modelo basado en presencia visual
+                  </p>
+                  <p className="mt-1 text-sm text-white/60">
+                    Genera visibilidad, pero no una infraestructura clara de ingresos medibles.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-white/20 bg-white/10 p-6">
-            <p className="text-sm font-semibold text-white">
-              Retail Media activado por escaneo
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white">
-              <li>• Activado por un escaneo real</li>
-              <li>• Contextual al producto evaluado</li>
-              <li>• Impresiones registradas por evento</li>
-              <li>• Modelo basado en ingresos medibles</li>
-            </ul>
+          {/* Scan-activated retail media */}
+          <div className="rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-white/10 to-cyan-400/10 p-6 backdrop-blur transition hover:border-cyan-300/30 hover:from-white/10 hover:to-cyan-400/15">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="inline-flex rounded-xl bg-cyan-400/15 p-3 text-cyan-300">
+                <ScanLine size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-cyan-200/70">
+                  Modelo RMI
+                </p>
+                <p className="mt-1 text-base font-semibold text-white">
+                  Retail Media activado por escaneo
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Activado por un escaneo real
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    La interacción parte de una acción concreta del cliente dentro de la tienda.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Target size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Contextual al producto evaluado
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    El anuncio responde al SKU o categoría que el cliente está consultando.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <BarChart3 size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Impresiones registradas por evento
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    Cada exposición puede asociarse a una interacción específica y quedar registrada.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <TrendingUp size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Modelo basado en ingresos medibles
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    Convierte puntos de escaneo en inventario publicitario con base operativa y comercial.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
@@ -222,140 +385,109 @@ export default function EsHome() {
         subtitle="Tres pasos. Sin fricción. Diseñado para operar en tienda y escalar por sucursal."
       >
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm font-semibold text-white/50">
-              1) Puntos de escaneo en tienda
+          {/* Step 1 */}
+          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-5 flex items-center justify-between">
+              <div className="inline-flex rounded-xl bg-white/10 p-3">
+                <Smartphone size={20} />
+              </div>
+              <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-medium text-white/40">
+                Paso 1
+              </span>
+            </div>
+
+            <p className="text-base font-semibold text-white">
+              Puntos de escaneo en tienda
             </p>
-            <p className="mt-3 text-sm text-white/70">
-              Se despliega en verificadores de precio, kioscos y estaciones
-              asistidas. En reposo, muestra un carrusel (standby) configurable.
+
+            <p className="mt-3 text-sm text-white/65">
+              Se despliega en verificadores, kioscos y estaciones asistidas. En
+              reposo, mantiene un carrusel configurable.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• APK segura basada en Android</li>
-              <li>• Control por tienda / región</li>
-              <li>• Modo standby medible</li>
-            </ul>
+
+            <div className="mt-5 space-y-2">
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                APK segura basada en Android
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                Control por tienda / región
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                Modo standby medible
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm font-semibold text-white/50">
-              2) Escaneo activa selección del anuncio
+          {/* Step 2 */}
+          <div className="relative rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-white/10 to-cyan-400/10 p-6 backdrop-blur transition hover:border-cyan-300/30 hover:from-white/10 hover:to-cyan-400/15">
+            <div className="mb-5 flex items-center justify-between">
+              <div className="inline-flex rounded-xl bg-cyan-400/15 p-3 text-cyan-300">
+                <Sparkles size={20} />
+              </div>
+              <span className="rounded-full border border-cyan-300/20 px-3 py-1 text-xs font-medium text-cyan-200/70">
+                Paso 2
+              </span>
+            </div>
+
+            <p className="text-base font-semibold text-white">
+              El escaneo activa la selección
             </p>
+
             <p className="mt-3 text-sm text-white/70">
-              Cuando el cliente escanea un producto, el sistema identifica el
-              contexto (SKU/categoría) y evalúa campañas elegibles para ese
-              momento.
+              El sistema detecta SKU o categoría y evalúa qué campañas aplican a ese
+              momento específico.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Selección en tiempo real</li>
-              <li>• Contexto por producto</li>
-              <li>• Entrega inmediata del creativo</li>
-            </ul>
+
+            <div className="mt-5 space-y-2">
+              <div className="rounded-xl border border-cyan-300/15 bg-black/10 px-3 py-2 text-sm text-white/75">
+                Selección en tiempo real
+              </div>
+              <div className="rounded-xl border border-cyan-300/15 bg-black/10 px-3 py-2 text-sm text-white/75">
+                Contexto por producto
+              </div>
+              <div className="rounded-xl border border-cyan-300/15 bg-black/10 px-3 py-2 text-sm text-white/75">
+                Entrega inmediata del creativo
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm font-semibold text-white/50">
-              3) Medición y monetización
+          {/* Step 3 */}
+          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-5 flex items-center justify-between">
+              <div className="inline-flex rounded-xl bg-white/10 p-3">
+                <Database size={20} />
+              </div>
+              <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-medium text-white/40">
+                Paso 3
+              </span>
+            </div>
+
+            <p className="text-base font-semibold text-white">
+              Medición y monetización
             </p>
-            <p className="mt-3 text-sm text-white/70">
-              Cada evento queda registrado. El backoffice muestra analítica y
-              soporta facturación y modelos de revenue share o suscripción.
+
+            <p className="mt-3 text-sm text-white/65">
+              Cada evento queda registrado y alimenta analítica, reporting y base
+              operativa para facturación.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Logs por evento</li>
-              <li>• Reportes por tienda y campaña</li>
-              <li>• Base para facturación</li>
-            </ul>
+
+            <div className="mt-5 space-y-2">
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                Logs por evento
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                Reportes por tienda y campaña
+              </div>
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 text-sm text-white/70">
+                Base para facturación
+              </div>
+            </div>
           </div>
         </div>
-      </Section>
 
-      {/* BUSINESS MODEL */}
-      <Section
-        id="model"
-        title="Modelo de negocio"
-        subtitle="Dos formas de implementarlo, dependiendo del nivel de control que quiera el retailer."
-      >
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="text-sm font-semibold text-white/50">
-              Opción A — Revenue Share
-            </p>
-            <p className="mt-3 text-sm text-white/70">
-              Enfoque para acelerar despliegue y monetización sin fricción.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Sin costo inicial de plataforma</li>
-              <li>• Compromiso mínimo de inversión publicitaria</li>
-              <li>• Ingresos compartidos mensualmente</li>
-            </ul>
-          </div>
-
-          <div className="rounded-2xl border border-white/20 bg-white/10 p-6">
-            <p className="text-sm font-semibold text-white">
-              Opción B — SaaS + Hardware
-            </p>
-            <p className="mt-3 text-sm text-white/70">
-              El retailer gestiona y opera su red de campañas con control total.
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-white/70">
-              <li>• Despliegue de hardware</li>
-              <li>• Suscripción mensual de plataforma</li>
-              <li>• Gestión multi-tienda desde backoffice</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* INDUSTRIES */}
-      <Section
-        id="industries"
-        title="Para quién es"
-        subtitle="Pensado para cadenas que quieren una nueva fuente de ingresos y control medible en tienda."
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="font-medium">Retailers objetivo</p>
-            <ul className="mt-3 space-y-2 text-sm text-white/70">
-              <li>• Supermercados (10+ tiendas)</li>
-              <li>• Farmacias</li>
-              <li>• Big-box / Departamentales</li>
-              <li>• Conveniencia</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="font-medium">Ideal si buscas</p>
-            <ul className="mt-3 space-y-2 text-sm text-white/70">
-              <li>• Monetizar puntos existentes en tienda</li>
-              <li>• Escalar por sucursal y región</li>
-              <li>• Reportes y control centralizado</li>
-              <li>• Un modelo de ingresos repetible</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* METRICS */}
-      <Section
-        id="metrics"
-        title="Lo que se mide"
-        subtitle="No es ‘branding’. Es operación medible con base para facturación y optimización."
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>• Impresiones por evento</li>
-              <li>• Actividad de campañas por categoría</li>
-              <li>• Distribución por tienda / región</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>• Inventario generado por punto de escaneo</li>
-              <li>• Rendimiento por creativo</li>
-              <li>• Base para facturación (según modelo)</li>
-            </ul>
-          </div>
+        <div className="mt-6 hidden items-center justify-center gap-3 text-white/25 md:flex">
+          <ArrowRight size={16} />
+          <ArrowRight size={16} />
         </div>
       </Section>
 
@@ -416,19 +548,114 @@ export default function EsHome() {
         subtitle="Cuando no hay escaneo, el sistema mantiene presencia con un carrusel medible y playlists dinámicas por tienda."
       >
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>• Carrusel dinámico mientras está inactivo</li>
-              <li>• Impresiones medibles</li>
-              <li>• Variación automática para evitar repetición</li>
-            </ul>
+          {/* Left side */}
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/20 hover:bg-white/10">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="inline-flex rounded-xl bg-white/10 p-3">
+                <GalleryHorizontal size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/40">
+                  Presencia continua
+                </p>
+                <p className="mt-1 text-base font-semibold text-white">
+                  Carrusel medible mientras está inactivo
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Eye size={18} className="mt-0.5 shrink-0 text-white/45" />
+                <div>
+                  <p className="text-sm font-medium text-white/90">
+                    Carrusel dinámico
+                  </p>
+                  <p className="mt-1 text-sm text-white/65">
+                    Mantiene presencia visual mientras el punto no está siendo utilizado.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Eye size={18} className="mt-0.5 shrink-0 text-white/45" />
+                <div>
+                  <p className="text-sm font-medium text-white/90">
+                    Impresiones medibles
+                  </p>
+                  <p className="mt-1 text-sm text-white/65">
+                    Permite registrar exposición aun cuando no hay interacción de escaneo.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Shuffle size={18} className="mt-0.5 shrink-0 text-white/45" />
+                <div>
+                  <p className="text-sm font-medium text-white/90">
+                    Variación automática
+                  </p>
+                  <p className="mt-1 text-sm text-white/65">
+                    Reduce repetición visual mediante playlists dinámicas.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>• Distribución regional de campañas</li>
-              <li>• Control por tienda</li>
-              <li>• Complementa (no reemplaza) el escaneo</li>
-            </ul>
+
+          {/* Right side */}
+          <div className="rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-white/10 to-cyan-400/10 p-6 backdrop-blur transition hover:border-cyan-300/30 hover:from-white/10 hover:to-cyan-400/15">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="inline-flex rounded-xl bg-cyan-400/15 p-3 text-cyan-300">
+                <Layers3 size={20} />
+              </div>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-cyan-200/70">
+                  Operación distribuida
+                </p>
+                <p className="mt-1 text-base font-semibold text-white">
+                  Control por tienda y región
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Map size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Distribución regional
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    Las campañas pueden variar según ubicación, región o grupo de tiendas.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Building2 size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Control por tienda
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    Permite ajustar playlists y presencia según cada punto de despliegue.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <ArrowRight size={18} className="mt-0.5 shrink-0 text-cyan-300" />
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    Complementa el escaneo
+                  </p>
+                  <p className="mt-1 text-sm text-white/70">
+                    Aporta presencia continua, pero no reemplaza el núcleo activado por evento.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Section>
@@ -439,24 +666,69 @@ export default function EsHome() {
         title="Solicite un Briefing Ejecutivo"
         subtitle="Reciba el modelo de ingresos, plan de despliegue y demo privada de la plataforma."
       >
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <a
-              className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black hover:opacity-90"
-              href="mailto:info@retailmedia.cc?subject=Solicitud%20Briefing%20Ejecutivo%20RMI"
-            >
-              Enviar correo para agendar
-            </a>
-            <a
-              className="rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white hover:border-white/30"
-              href="#backoffice"
-            >
-              Ver plataforma / screenshots
-            </a>
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur md:p-10">
+          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="absolute -bottom-12 -left-10 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
+
+          <div className="relative z-10 grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/40">
+                Próximo paso
+              </p>
+
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white md:text-3xl">
+                Conozca el modelo, el despliegue y la operación de la red
+              </h3>
+
+              <p className="mt-4 max-w-2xl text-sm text-white/65 md:text-base">
+                Presentamos una vista ejecutiva del modelo de ingresos, el esquema de
+                implementación y una demostración privada del backoffice y la lógica
+                de activación por escaneo.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3 text-xs text-white/50">
+                <span className="rounded-full border border-white/10 px-3 py-1.5">
+                  Modelo de ingresos
+                </span>
+                <span className="rounded-full border border-white/10 px-3 py-1.5">
+                  Plan de despliegue
+                </span>
+                <span className="rounded-full border border-white/10 px-3 py-1.5">
+                  Demo privada
+                </span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-black/10 p-5">
+              <p className="text-sm font-medium text-white">
+                Agende una conversación inicial
+              </p>
+              <p className="mt-2 text-sm text-white/60">
+                Reciba una presentación ejecutiva enfocada en monetización, operación
+                y escalabilidad.
+              </p>
+
+              <div className="mt-5 flex flex-col gap-3">
+                <a
+                  className="inline-flex items-center justify-center rounded-full bg-[rgb(var(--rmi-accent))] px-6 py-3 text-sm font-medium text-white shadow-[0_0_25px_rgba(59,130,246,0.25)] transition hover:brightness-110"
+                  href="mailto:info@retailmedia.cc?subject=Solicitud%20Briefing%20Ejecutivo%20RMI"
+                >
+                  Enviar correo para agendar
+                </a>
+
+                <a
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10"
+                  href="#backoffice"
+                >
+                  Ver plataforma / screenshots
+                </a>
+              </div>
+
+              <p className="mt-4 text-xs text-white/45">
+                Luego puede migrarse a formulario o integración con Calendly.
+              </p>
+            </div>
           </div>
-          <p className="mt-4 text-xs text-white/50">
-            (Luego podemos cambiar esto por un formulario + Calendly.)
-          </p>
         </div>
       </Section>
 

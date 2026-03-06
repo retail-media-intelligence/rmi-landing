@@ -73,7 +73,7 @@ export default function Header({ lang }: { lang: "en" | "es" }) {
         {/* Right side */}
         <div className="flex items-center gap-3">
           {/* Lang pills */}
-          <LangDropdown lang={lang} />
+          {/*<LangDropdown lang={lang} />*/}
 
           {/* CTA */}
           <Button href="#cta" variant="primary" className="accent-glow">
