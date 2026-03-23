@@ -535,10 +535,7 @@ export default function EsHome() {
           })}
         </div>
 
-        <p className="mt-6 text-sm text-white/60">
-          Tip: cuando tengas los screenshots, reemplazamos estos placeholders por
-          imágenes reales (grid) y queda “enterprise-ready”.
-        </p>
+       
       </Section>
 
       {/* STANDBY */}
