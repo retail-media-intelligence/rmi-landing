@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import Header from '@/components/Header'; // Inyectamos tu Header original
 
 // 1. Definimos la estructura de datos
 interface SeoPageData {
@@ -36,7 +37,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// 4. METADATA (Corregido para Next.js 15/16 con await params)
+// 4. METADATA 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const data = await getSheetData();
@@ -53,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-// 5. PÁGINA FRONTEND (Corregido para Next.js 15/16 con await params)
+// 5. PÁGINA FRONTEND PREMIUM
 export default async function SolucionSEO({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const data = await getSheetData();
@@ -65,49 +66,65 @@ export default async function SolucionSEO({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="bg-white text-gray-900 min-h-screen">
-      <section className="bg-blue-900 text-white py-20 px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            {pageData.h1}
-          </h1>
-          <div className="inline-block bg-blue-800 px-4 py-2 rounded-full text-sm font-semibold tracking-wide uppercase mb-6">
-            Soluciones para {pageData.pais}
+    <div className="min-h-screen bg-black text-white selection:bg-white/30">
+      {/* Tu Header Oficial */}
+      <Header lang="es" />
+
+      <main>
+        {/* Sección Hero con fondo oscuro y brillo sutil */}
+        <section className="relative overflow-hidden py-24 px-6">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black -z-10"></div>
+          <div className="mx-auto max-w-5xl text-center">
+            <div className="mb-8 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium tracking-wide text-white/80 uppercase">
+              Soluciones para {pageData.pais}
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
+              {pageData.h1}
+            </h1>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-xl md:text-2xl leading-relaxed text-gray-700 font-light border-l-4 border-blue-500 pl-6 mb-12">
-            {pageData.parrafointro}
-          </p>
+        {/* Sección de Contenido */}
+        <section className="pb-24 px-6">
+          <div className="mx-auto max-w-4xl">
+            {/* Párrafo Intro */}
+            <p className="text-xl md:text-2xl leading-relaxed text-white/70 font-light border-l-4 border-blue-500/50 pl-6 mb-16">
+              {pageData.parrafointro}
+            </p>
 
-          <div className="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100">
-            <h2 className="text-2xl font-bold mb-4">¿Por qué elegir nuestra plataforma de {pageData.servicio}?</h2>
-            <ul className="space-y-4 text-lg text-gray-600">
-              <li className="flex items-start">
-                <span className="text-blue-500 mr-3">✓</span>
-                Monetización inmediata a través de anuncios contextuales.
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-500 mr-3">✓</span>
-                Reportería automatizada para facturación a marcas CPG.
-              </li>
-              <li className="flex items-start">
-                <span className="text-blue-500 mr-3">✓</span>
-                Soporte y despliegue especializado para el mercado de {pageData.pais}.
-              </li>
-            </ul>
-            
-            <div className="mt-10">
-              <a href="/es/contacto" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg transition-colors duration-200">
-                Agendar una Demo en {pageData.pais}
-              </a>
+            {/* Caja de Beneficios (Card de cristal) */}
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12 shadow-2xl backdrop-blur-sm">
+              <h2 className="text-2xl md:text-3xl font-semibold mb-8 tracking-tight text-white">
+                ¿Por qué elegir nuestra plataforma de {pageData.servicio}?
+              </h2>
+              <ul className="space-y-6 text-lg text-white/70">
+                <li className="flex items-start gap-4">
+                  <span className="text-blue-400 mt-1">✦</span>
+                  <span>Monetización inmediata a través de anuncios contextuales.</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-blue-400 mt-1">✦</span>
+                  <span>Reportería automatizada para facturación a marcas CPG.</span>
+                </li>
+                <li className="flex items-start gap-4">
+                  <span className="text-blue-400 mt-1">✦</span>
+                  <span>Soporte y despliegue especializado para el mercado de {pageData.pais}.</span>
+                </li>
+              </ul>
+              
+              {/* Botón CTA apuntando al home */}
+              <div className="mt-12 pt-8 border-t border-white/10">
+                <a 
+                  href="/es#cta" 
+                  className="inline-flex h-12 items-center justify-center rounded-md bg-white px-8 text-sm font-medium text-black transition-colors hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black"
+                >
+                  Agendar briefing en {pageData.pais}
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }
