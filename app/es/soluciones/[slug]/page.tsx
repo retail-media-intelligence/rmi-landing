@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
-// 1. Definimos la estructura de datos que viene de tu Google Sheet
+// 1. Definimos la estructura de datos
 interface SeoPageData {
   slug: string;
   servicio: string;
@@ -13,39 +13,34 @@ interface SeoPageData {
   parrafointro: string;
 }
 
-// 2. Función para obtener los datos de tu Sheet (Reemplaza la URL)
+// 2. Fetch a la API
 async function getSheetData(): Promise<SeoPageData[]> {
-  // Reemplaza esta URL con la que te dio Sheety o SteinHQ
   const API_URL = 'https://api.sheety.co/e6a630f703aa492f0bfb2337e7290a74/maestroPaginasDinamicas/sheet1?v=1';
   
-  // Hacemos fetch a los datos. Al estar en Next.js, esto ocurre en el servidor.
-  const res = await fetch(API_URL, { next: { revalidate: 10 } }); // Se actualiza cada hora
+  const res = await fetch(API_URL, { next: { revalidate: 10 } }); 
   
   if (!res.ok) {
-    console.error('Error al obtener datos del Google Sheet');
+    console.error('Error al obtener datos');
     return [];
   }
 
   const json = await res.json();
-  // Sheety devuelve los datos dentro de un objeto con el nombre de la hoja (ej. json.hoja1)
   return json.sheet1 || []; 
 }
 
-// 3. GENERACIÓN ESTÁTICA PARA SEO (El truco para Cloudflare Pages)
-// Esto le dice a Next.js qué URLs existen antes de que el usuario entre,
-// generando las 35 páginas de golpe a máxima velocidad.
+// 3. Generación Estática
 export async function generateStaticParams() {
   const data = await getSheetData();
-  
   return data.map((row) => ({
     slug: row.slug,
   }));
 }
 
-// 4. METADATA DINÁMICA (Para que Google vea títulos y descripciones distintos en cada página)
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+// 4. METADATA (Corregido para Next.js 15/16 con await params)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
   const data = await getSheetData();
-  const pageData = data.find((row) => row.slug === params.slug);
+  const pageData = data.find((row) => row.slug === resolvedParams.slug);
 
   if (!pageData) {
     return { title: 'Página no encontrada' };
@@ -58,24 +53,21 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-// 5. EL DISEÑO DE LA PÁGINA (Lo que ve el gerente de retail)
-export default async function SolucionSEO({ params }: { params: { slug: string } }) {
+// 5. PÁGINA FRONTEND (Corregido para Next.js 15/16 con await params)
+export default async function SolucionSEO({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const data = await getSheetData();
   
-  // Buscamos la fila exacta que coincide con la URL actual
-  const pageData = data.find((row) => row.slug === params.slug);
+  const pageData = data.find((row) => row.slug === resolvedParams.slug);
 
-  // Si alguien escribe una URL que no está en tu Sheet, le da error 404
   if (!pageData) {
     notFound();
   }
 
   return (
     <main className="bg-white text-gray-900 min-h-screen">
-      {/* Sección Hero (Cabecera) */}
       <section className="bg-blue-900 text-white py-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          {/* Aquí inyectamos el H1 de tu Sheet */}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             {pageData.h1}
           </h1>
@@ -85,10 +77,8 @@ export default async function SolucionSEO({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* Sección de Contenido Principal */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          {/* Aquí inyectamos el Párrafo B2B Persuasivo */}
           <p className="text-xl md:text-2xl leading-relaxed text-gray-700 font-light border-l-4 border-blue-500 pl-6 mb-12">
             {pageData.parrafointro}
           </p>
