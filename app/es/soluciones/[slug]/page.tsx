@@ -28,7 +28,7 @@ async function getSheetData(): Promise<SeoPageData[]> {
 
   const json = await res.json();
   // Sheety devuelve los datos dentro de un objeto con el nombre de la hoja (ej. json.hoja1)
-  return json.hoja1 || []; 
+  return json.sheet1 || []; 
 }
 
 // 3. GENERACIÓN ESTÁTICA PARA SEO (El truco para Cloudflare Pages)
