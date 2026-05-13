@@ -16,7 +16,7 @@ interface SeoPageData {
 // 2. Función para obtener los datos de tu Sheet (Reemplaza la URL)
 async function getSheetData(): Promise<SeoPageData[]> {
   // Reemplaza esta URL con la que te dio Sheety o SteinHQ
-  const API_URL = 'https://api.sheety.co/TU_CODIGO_AQUI/retailMediaSeo/hoja1';
+  const API_URL = 'https://api.sheety.co/e6a630f703aa492f0bfb2337e7290a74/maestroPaginasDinamicas/sheet1';
   
   // Hacemos fetch a los datos. Al estar en Next.js, esto ocurre en el servidor.
   const res = await fetch(API_URL, { next: { revalidate: 3600 } }); // Se actualiza cada hora
