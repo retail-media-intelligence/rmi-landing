@@ -54,20 +54,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 // 5. FUNCION DE BANDERITAS
-const obtenerBandera = (pais: string) => {
-  const banderas: Record<string, string> = {
-    'mexico': '🇲🇽',
-    'méxico': '🇲🇽',
-    'panama': '🇵🇦',
-    'panamá': '🇵🇦',
-    'colombia': '🇨🇴',
-    'republica dominicana': '🇩🇴',
-    'república dominicana': '🇩🇴',
-    'guatemala': '🇬🇹',
-    'costa rica': '🇨🇷',
-    'el salvador': '🇸🇻'
+const obtenerCodigoBandera = (pais: string) => {
+  const codigos: Record<string, string> = {
+    'mexico': 'mx',
+    'méxico': 'mx',
+    'panama': 'pa',
+    'panamá': 'pa',
+    'colombia': 'co',
+    'republica dominicana': 'do',
+    'república dominicana': 'do',
+    'guatemala': 'gt',
+    'costa rica': 'cr',
+    'el salvador': 'sv'
   };
-  return banderas[pais.toLowerCase()] || '';
+  return codigos[pais.toLowerCase()] || '';
 };
 
 // 6. PÁGINA FRONTEND PREMIUM
@@ -91,9 +91,18 @@ export default async function SolucionSEO({ params }: { params: Promise<{ slug: 
         <section className="relative overflow-hidden py-24 px-6">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black -z-10"></div>
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-8 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium tracking-wide text-white/80 uppercase">
-              Soluciones para {pageData.pais} {obtenerBandera(pageData.pais)}
-            </div>
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium tracking-wide text-white/80 uppercase">
+            <span>Soluciones para {pageData.pais}</span>
+            {obtenerCodigoBandera(pageData.pais) && (
+              <img 
+                src={`https://flagcdn.com/w20/${obtenerCodigoBandera(pageData.pais)}.png`} 
+                srcSet={`https://flagcdn.com/w40/${obtenerCodigoBandera(pageData.pais)}.png 2x`}
+                width="20" 
+                alt={`Bandera de ${pageData.pais}`}
+                className="rounded-sm shadow-sm"
+              />
+            )}
+          </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
               {pageData.h1}
             </h1>
