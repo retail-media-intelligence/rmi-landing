@@ -53,8 +53,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: pageData.palabraclave,
   };
 }
+// 5. FUNCION DE BANDERITAS
+const obtenerBandera = (pais: string) => {
+  const banderas: Record<string, string> = {
+    'mexico': '🇲🇽',
+    'méxico': '🇲🇽',
+    'panama': '🇵🇦',
+    'panamá': '🇵🇦',
+    'colombia': '🇨🇴',
+    'republica dominicana': '🇩🇴',
+    'república dominicana': '🇩🇴',
+    'guatemala': '🇬🇹',
+    'costa rica': '🇨🇷',
+    'el salvador': '🇸🇻'
+  };
+  return banderas[pais.toLowerCase()] || '';
+};
 
-// 5. PÁGINA FRONTEND PREMIUM
+// 6. PÁGINA FRONTEND PREMIUM
 export default async function SolucionSEO({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const data = await getSheetData();
@@ -76,7 +92,7 @@ export default async function SolucionSEO({ params }: { params: Promise<{ slug: 
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black -z-10"></div>
           <div className="mx-auto max-w-5xl text-center">
             <div className="mb-8 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium tracking-wide text-white/80 uppercase">
-              Soluciones para {pageData.pais}
+              Soluciones para {pageData.pais} {obtenerBandera(pageData.pais)}
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
               {pageData.h1}
