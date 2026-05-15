@@ -1,49 +1,33 @@
 import { MetadataRoute } from 'next';
+import { paginasData } from '@/app/data/data'; // Asegúrate de que la ruta apunte a tu archivo data.ts
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://retailmedia.cc';
 
-  // 1. Rutas estáticas de tu web principal
+  // 1. Rutas estáticas principales (Tus Homepages)
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/es`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1.0,
+      priority: 1.0, // Prioridad máxima para el home
     },
     {
       url: `${baseUrl}/en`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
-    }
+    },
   ];
 
-  // 2. Rutas dinámicas (Extraídas automáticamente de tu Google Sheet)
-  let dynamicRoutes: MetadataRoute.Sitemap = [];
-  
-  try {
-    // Usamos tu API de Sheety
-    const API_URL = 'https://api.sheety.co/e6a630f703aa492f0bfb2337e7290a74/maestroPaginasDinamicas/sheet1';
-    
-    // Aquí sí le damos un caché de 1 hora para no saturar la API cada vez que Google revise
-    const res = await fetch(API_URL, { next: { revalidate: 3600 } }); 
-    
-    if (res.ok) {
-      const json = await res.json();
-      const rows = json.sheet1 || [];
-      
-      dynamicRoutes = rows.map((row: any) => ({
-        url: `${baseUrl}/es/soluciones/${row.slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.8, // Prioridad alta para SEO
-      }));
-    }
-  } catch (error) {
-    console.error('Error al generar el sitemap dinámico', error);
-  }
+  // 2. Rutas dinámicas de SEO (Tus 35 páginas de países generadas automáticamente)
+  const seoRoutes: MetadataRoute.Sitemap = paginasData.map((pagina) => ({
+    url: `${baseUrl}/es/soluciones/${pagina.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly', // Mensual es ideal para contenido SEO estático
+    priority: 0.8, // Prioridad alta, pero por debajo del home
+  }));
 
-  // 3. Unimos todo y se lo entregamos a Google
-  return [...staticRoutes, ...dynamicRoutes];
+  // 3. Combinamos todo en un solo Sitemap poderoso
+  return [...staticRoutes, ...seoRoutes];
 }
