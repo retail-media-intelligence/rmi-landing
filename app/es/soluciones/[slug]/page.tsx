@@ -1,48 +1,19 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Header from '@/components/Header'; // Inyectamos tu Header original
+import { paginasData } from '@/app/data/data'; // Importamos tu base de datos local estática
 
-
-// 1. Definimos la estructura de datos
-interface SeoPageData {
-  slug: string;
-  servicio: string;
-  pais: string;
-  palabraclave: string;
-  metatitle: string;
-  metadescription: string;
-  h1: string;
-  parrafointro: string;
-}
-
-// 2. Fetch a la API
-async function getSheetData(): Promise<SeoPageData[]> {
-  const API_URL = 'https://api.sheety.co/e6a630f703aa492f0bfb2337e7290a74/maestroPaginasDinamicas/sheet1?v=1';
-  
-  const res = await fetch(API_URL, { next: { revalidate: 10 } }); 
-  
-  if (!res.ok) {
-    console.error('Error al obtener datos');
-    return [];
-  }
-
-  const json = await res.json();
-  return json.sheet1 || []; 
-}
-
-// 3. Generación Estática
-export async function generateStaticParams() {
-  const data = await getSheetData();
-  return data.map((row) => ({
+// 1. Generación Estática (Reemplaza el fetch a Sheety)
+export function generateStaticParams() {
+  return paginasData.map((row) => ({
     slug: row.slug,
   }));
 }
 
-// 4. METADATA 
+// 2. METADATA (SEO dinámico)
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const data = await getSheetData();
-  const pageData = data.find((row) => row.slug === resolvedParams.slug);
+  const pageData = paginasData.find((row) => row.slug === resolvedParams.slug);
 
   if (!pageData) {
     return { title: 'Página no encontrada' };
@@ -54,10 +25,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     keywords: pageData.palabraclave,
   };
 }
-// 5. FUNCION DE BANDERITAS
-// Función blindada contra errores de filas vacías
+
+// 3. FUNCION DE BANDERITAS (Protegida)
 const obtenerCodigoBandera = (pais?: string) => {
-  if (!pais) return ''; // Si la celda del Excel está vacía, no hace nada y no se estrella
+  if (!pais) return ''; 
   
   const codigos: Record<string, string> = {
     'mexico': 'mx',
@@ -74,12 +45,10 @@ const obtenerCodigoBandera = (pais?: string) => {
   return codigos[pais.toLowerCase()] || '';
 };
 
-// 6. PÁGINA FRONTEND PREMIUM
+// 4. PÁGINA FRONTEND PREMIUM
 export default async function SolucionSEO({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const data = await getSheetData();
-  
-  const pageData = data.find((row) => row.slug === resolvedParams.slug);
+  const pageData = paginasData.find((row) => row.slug === resolvedParams.slug);
 
   if (!pageData) {
     notFound();
