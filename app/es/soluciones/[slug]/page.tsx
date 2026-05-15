@@ -54,7 +54,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 // 5. FUNCION DE BANDERITAS
-const obtenerCodigoBandera = (pais: string) => {
+// Función blindada contra errores de filas vacías
+const obtenerCodigoBandera = (pais?: string) => {
+  if (!pais) return ''; // Si la celda del Excel está vacía, no hace nada y no se estrella
+  
   const codigos: Record<string, string> = {
     'mexico': 'mx',
     'méxico': 'mx',
