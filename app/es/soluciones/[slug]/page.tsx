@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Header from '@/components/Header'; // Inyectamos tu Header original
-export const runtime = 'edge';
+
 
 // 1. Definimos la estructura de datos
 interface SeoPageData {
